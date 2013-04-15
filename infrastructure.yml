@@ -1,19 +1,20 @@
 cookbooks:
 - apt:
-  - 1.5.1
 - chef-client:
 - ntp:
 - openssh:
 - sudo:
 - users:
-# - lxc:
+- omnibus_updater:
+- lxc:
 - haproxy:
 - apache2:
 - demo-app:
 
 data bags:
 - users:
-  - "*"
+    items:
+    - mray
 
 environments:
 - sputnik:
@@ -24,20 +25,3 @@ roles:
 - sputnik-base:
 - haproxy:
 - demo-app:
-
-nodes:
-- sputnik-laptop.local:
-  - role[sputnik-base]
-  - -i ~/.ssh/mray.pem -x mray --sudo -E sputnik
-- lxc 1:
-  - role[base],role[haproxy]
-  - -I 10 -f2 ~/.ssh/mray.pem -E sputnik
-- lxc 2:
-  - role[base],role[demo-app]
-  - -I 10 -f2 ~/.ssh/mray.pem -N lxc-demo-app-{{n}} -E sputnik
-- openstack 1:
-  - role[base],role[haproxy]
-  - -f 100 -I 9883 -S testing-az2 -G haproxy,default -i ~/.ssh/testing-az2.pem -Z az2 -x ubuntu -E production
-- openstack 2:
-  - role[base],role[demo-app]
-  - -f 100 -I 9883 -S testing-az2 -N cloud-demo-app-{{n}} -i ~/.ssh/testing-az2.pem -Z az2 -x ubuntu -E production

@@ -2,7 +2,7 @@ apache2
 apt
 chef-client
 haproxy
-lxc
+lxc-server
 ntp
 openssh
 sudo
