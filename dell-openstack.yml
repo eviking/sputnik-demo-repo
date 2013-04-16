@@ -2,7 +2,7 @@ clusters:
 - dell-openstack:
   - openstack 1:
       run_list: role[base],role[haproxy]
-      options: -f 100 -I 9883 -S testing-az2 -G haproxy,default -i ~/.ssh/testing-az2.pem -Z az2 -x ubuntu -E sputnik
+      options: -f 2 -I 490146ba-90c9-4e09-89d1-be93311cc0f2 -a --no-host-key-verify -S dell -G haproxy,default -i ~/.ssh/dell.pem -x ubuntu -E sputnik
   - openstack 2:
       run_list: role[base],role[demo-app]
-      options: -f 100 -I 9883 -S testing-az2 -N dell-cloud-demo-app-{{n}} -i ~/.ssh/testing-az2.pem -Z az2 -x ubuntu -E sputnik
+      options: -f 2 -I 490146ba-90c9-4e09-89d1-be93311cc0f2 -a --no-host-key-verify -S dell -N dell-cloud-demo-app-{{n}} -i ~/.ssh/dell.pem -x ubuntu -E sputnik
